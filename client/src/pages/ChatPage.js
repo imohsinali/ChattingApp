@@ -3,7 +3,7 @@ import axios from "axios";
 const ChatPage = () => {
   const [chats, setChats] = useState({});
   const fetchChat = async () => {
-    const { data } = await axios.get("/api/chat");
+    const data = await axios.get("/api/user");
 
     setChats(data);
   };
@@ -13,9 +13,7 @@ const ChatPage = () => {
   console.warn(chats);
   return (
     <div>
-      {chats.map((chat) => (
-        <div key={chat._id}>{chat.chatName}</div>
-      ))}
+      <h1>Chat page</h1>
     </div>
   );
 };
