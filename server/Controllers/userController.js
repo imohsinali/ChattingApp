@@ -27,7 +27,7 @@ export const registerUser = asyncHandler(async (req, res) => {
       email: user.email,
       password: user.password,
       pic: user.pic,
-      token: generateToken(user._d),
+      token: generateToken(user._id),
     });
   } else {
     res.status(400);
@@ -45,7 +45,7 @@ export const authUser = asyncHandler(async (req, res) => {
       email: user.email,
       password: user.password,
       pic: user.pic,
-      token: generateToken(user._d),
+      token: generateToken(user._id),
     });
   } else {
     res.status(400);
@@ -65,6 +65,9 @@ export const allUsers = async (req, res) => {
         ],
       }
     : {};
-  const users = await User.find(keyword).find({ _id: { $ne: req.user._id } });
+  const users = await User.find(keyword).find({
+    _id: { $ne: req.user.id },
+  });
+  console.log(req.user);
   res.send(users);
 };
